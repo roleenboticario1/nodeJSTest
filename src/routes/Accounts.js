@@ -29,7 +29,10 @@ router.post('/create', async (req, res) => {
 })
 
 router.get('/retrieve', async (req, res) => {
-  const results = await RetrieveService()
+  
+  const { _id } = req.body
+
+  const results = await RetrieveService(_id)
 
   if (results) {
     res
