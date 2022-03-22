@@ -1,14 +1,15 @@
-const Accounts = require('../models/Accounts')
+const Accounts = require('../models/TodoLists')
 
-module.exports = async (username, password) => {
+module.exports = async (title, description) => {
   try {
     await Accounts.insertMany({
-      username,
-      password
+      title,
+      description
     })
 
     return true
   } catch (err) {
+  	console.log(err)
     return false
   }
 }

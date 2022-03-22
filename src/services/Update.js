@@ -1,4 +1,4 @@
-const Accounts = require('../models/Accounts')
+const Accounts = require('../models/TodoLists')
 
 module.exports = async ( _id, set ) => {
   try {
