@@ -2,7 +2,7 @@ const Accounts = require('../models/Accounts')
 
 module.exports = async( id, obj ) => {
 	try{
-		await Accounts.updat({ _id }, { $set: obj })
+		await Accounts.update({ _id }, { $set: obj })
 		
 		return true
 	}catch (err) {

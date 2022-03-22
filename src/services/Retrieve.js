@@ -5,6 +5,7 @@ module.exports = async() => {
 		const result = await Accounts.find()
 		return result
 	}catch (err) {
+		
         return []
 	}
 }
