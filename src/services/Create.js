@@ -8,7 +8,6 @@ module.exports = async( username, password ) => {
 		})
 		return true;
 	}catch (err) {
-		console.log("err :" ,err)
         return false
 	}
 }
