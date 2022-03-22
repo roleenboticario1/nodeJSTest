@@ -1,105 +1,92 @@
 const express = require('express')
 const router = express.Router()
 
-const CreateServices = require('../services/Create');
-const RetrieveServices = require('../services/Retrieve');
-const UpdateServices = require('../services/Update');
-const DeleteServices = require('../services/Delete');
+const CreateService = require('../services/Create')
+const RetrieveService = require('../services/Retrieve')
+const UpdateService = require('../services/Update')
+const DeleteService = require('../services/Delete')
 
 router.post('/create', async (req, res) => {
+  const { username, password } = req.body
 
-   const { username, password } = req.body
+  const results = await CreateService(username, password)
 
-   const results = await CreateServices(username, password)
-
-   if(results){
-
-	   	res
-	   	  .status(200)
-	   	  .send({
-	   	  	 status : results,
-	   	  	 message : 'Data Successfully Created'
-	   	  })
-
-   }else{
-      res
-   	  .status(500)
-   	  .send({
-   	  	 status : results,
-   	  	 message : 'Data UnSuccessfully Created'
-   	  })
-   }
+  if (results) {
+    res
+      .status(200)
+      .send({
+        status: results,
+        message: 'Data Successfully Created!'
+      })
+  } else {
+    res
+      .status(500)
+      .send({
+        status: results,
+        message: 'Data Unsuccessfully Created!'
+      })
+  }
 })
 
+router.get('/retrieve', async (req, res) => {
+  const results = await RetrieveService()
 
-router.get('/retreive', async (req, res) => {
-
-   const results = await RetrieveServices()
-
-   if(results){
-	  res
-	   .status(200)
-	   .send(results)
-   }else{
-      res
-   	   .status(500)
-   	   .send({
-   	   	 status : results,
-   	  	 message : 'Data Failed To Retrieved'
-   	  })
-   }
+  if (results) {
+    res
+      .status(200)
+      .send(results)
+  } else {
+    res
+      .status(500)
+      .send({
+        status: results,
+        message: 'Dat Not Retrieved!'
+      })
+  }
 })
 
 router.put('/update', async (req, res) => {
+  const { _id, set } = req.body
 
-   const { id, obj } = req.body
+  const results = await UpdateService(_id, set)
 
-   const results = await UpdateServices(id, obj)
-
-   if(results){
-
-	   	res
-	   	  .status(200)
-	   	  .send({
-	   	  	 status : results,
-	   	  	 message : 'Data Successfully Updated'
-	   	  })
-
-   }else{
-      res
-   	  .status(500)
-   	  .send({
-   	  	 status : results,
-   	  	 message : 'Data UnSuccessfully Updated'
-   	  })
-   }
+  if (results) {
+    res
+      .status(200)
+      .send({
+        status: results,
+        message: 'Data Successfully Updated!'
+      })
+  } else {
+    res
+      .status(500)
+      .send({
+        status: results,
+        message: 'Data Unsuccessfully Updated'
+      })
+  }
 })
-	
 
 router.post('/delete', async (req, res) => {
+  const { _id } = req.body
 
-   const { id }  = req.body
+  const results = await DeleteService(_id)
 
-   const results = await UpdateServices(id)
-
-   if(results){
-
-	   	res
-	   	  .status(200)
-	   	  .send({
-	   	  	 status : results,
-	   	  	 message : 'Data Successfully Deleted'
-	   	  })
-
-   }else{
-      res
-   	  .status(500)
-   	  .send({
-   	  	 status : results,
-   	  	 message : 'Data UnSuccessfully Deleted'
-   	  })
-   }
-	
+  if (results) {
+    res
+      .status(200)
+      .send({
+        status: results,
+        message: 'Data Successfully Deleted!'
+      })
+  } else {
+    res
+      .status(500)
+      .send({
+        status: results,
+        message: 'Data Unsuccessfully Deleted!'
+      })
+  }
 })
 
 module.exports = router
